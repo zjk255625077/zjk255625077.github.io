@@ -1,0 +1,19 @@
+name = "connor-resume"
+compatibility_date = "2026-06-09"
+
+# Cloudflare Pages 部署配置
+# 部署前需要安装 wrangler:
+#   npm install -g wrangler
+#
+# 首次部署:
+#   npx wrangler login
+#   npm run build
+#   npx wrangler pages deploy dist/ --project-name=connor-resume
+#
+# 后续更新:
+#   npm run build && npx wrangler pages deploy dist/ --project-name=connor-resume
+#
+# 或者在 Cloudflare Dashboard 中连接 GitHub 仓库:
+#   Framework preset: Vite
+#   Build command:    npm run build
+#   Build output:     dist
