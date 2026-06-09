@@ -100,7 +100,9 @@ body::after {
   top: 0;
   left: 0;
   right: 0;
+  height: calc(var(--nav-height) + env(safe-area-inset-top, 0px));
   padding-top: env(safe-area-inset-top, 0px);
+  box-sizing: border-box;
   z-index: 100;
   background: var(--color-nav-scrolled);
   backdrop-filter: blur(20px);
@@ -118,7 +120,7 @@ body::after {
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 24px;
-  height: var(--nav-height);
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
