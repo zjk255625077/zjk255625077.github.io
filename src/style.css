@@ -857,3 +857,22 @@ body {
 
 
 
+
+/* === School Link === */
+.school-link {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 6px 18px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #ffffff;
+  background: var(--color-accent);
+  border-radius: 100px;
+  text-decoration: none;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.school-link:hover {
+  background: var(--color-accent-hover);
+  transform: translateY(-2px);
+}
