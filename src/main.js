@@ -1,44 +1,28 @@
 // ========================================
-//  Theme Management (Light / Dark)
+//  Theme Management — always follows system
 // ========================================
 
-const STORAGE_KEY = 'connor-theme';
+const systemDark = window.matchMedia('(prefers-color-scheme: dark)');
 
-/** Return 'light' or 'dark' — first checks localStorage, then system preference */
-function getPreferredTheme() {
-  const saved = localStorage.getItem(STORAGE_KEY);
-  if (saved === 'light' || saved === 'dark') return saved;
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-}
-
-/** Apply theme to DOM without persisting to localStorage */
-function applyTheme(theme) {
+// Apply current system preference
+const applyTheme = (theme) => {
   document.documentElement.setAttribute('data-theme', theme);
-}
+};
+applyTheme(systemDark.matches ? 'dark' : 'light');
 
-/** Apply theme AND persist user's choice to localStorage */
-function saveAndApplyTheme(theme) {
-  localStorage.setItem(STORAGE_KEY, theme);
-  applyTheme(theme);
-}
-
-// --- Initialisation ---
-// Apply system-preferred theme without saving (so future system changes still work)
-applyTheme(getPreferredTheme());
-
-// Listen for system theme changes — only auto-switch if user hasn't saved a preference
-window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-  if (!localStorage.getItem(STORAGE_KEY)) {
-    applyTheme(e.matches ? 'dark' : 'light');
-  }
+// Listen for system changes
+systemDark.addEventListener('change', (e) => {
+  applyTheme(e.matches ? 'dark' : 'light');
 });
 
-// Toggle button — manually switching saves the preference, locking the theme
+// Manual toggle — overrides for current session
 const toggleBtn = document.getElementById('themeToggle');
-toggleBtn.addEventListener('click', () => {
-  const current = document.documentElement.getAttribute('data-theme');
-  saveAndApplyTheme(current === 'dark' ? 'light' : 'dark');
-});
+if (toggleBtn) {
+  toggleBtn.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme');
+    applyTheme(current === 'dark' ? 'light' : 'dark');
+  });
+}
 
 // ========================================
 
